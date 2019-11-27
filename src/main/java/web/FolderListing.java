@@ -8,8 +8,13 @@ public class FolderListing implements IFolderListing {
 
     @Override
     public String getListing(String folderName) {
-
-        return folderName + "\\<br>"+  getContentOfFolder(new File(folderName).getAbsoluteFile(),0).toString();
+        File file = new File(folderName);
+        if(file.isDirectory()){
+            return folderName + "\\<br>"+  getContentOfFolder(file.getAbsoluteFile(),0).toString();
+        }
+        else{
+            return folderName + " - is not a directory <br>";
+        }
     }
 
     private static StringBuffer getContentOfFolder(File currentFile, int level) {
